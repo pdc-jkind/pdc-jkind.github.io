@@ -1,0 +1,1 @@
+window.location.replace("https://pdc-jkind.github.io/list_code_pdc/list-code-pdc");
