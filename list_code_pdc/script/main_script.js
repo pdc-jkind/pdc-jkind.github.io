@@ -231,7 +231,7 @@ function renderFilteredCards() {
       `;
 
       card.addEventListener("click", () => {
-        const url = new URL("./detail.html", window.location.origin);
+        const url = new URL("https://pdc-jkind.github.io/list_code_pdc/detail.html", window.location.origin);
         url.searchParams.set("mobilName", model);
         url.searchParams.set("pdcName", lokasi);
         url.searchParams.set("batchNumber", batch);

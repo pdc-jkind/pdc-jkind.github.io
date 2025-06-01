@@ -141,7 +141,7 @@ async function processData(pdcName, batch, vehiclesData, parsedData, rootCollect
     setTimeout(() => {
       const message = `Data berhasil ${mode === 'edit' ? 'diperbarui' : 'disimpan'}!`;
 
-      const url = new URL('./detail.html', window.location.origin);
+      const url = new URL('https://pdc-jkind.github.io/list_code_pdc/detail.html', window.location.origin);
       url.searchParams.set('status', 'success');
       url.searchParams.set('message', message);
       url.searchParams.set('mobilName', vehiclesData);
@@ -172,6 +172,6 @@ async function processData(pdcName, batch, vehiclesData, parsedData, rootCollect
  * Redirect ke halaman add_data.html dengan pesan error
  */
 function redirectWithError(message) {
-  const url = `./add_data.html?status=error&message=${encodeURIComponent(message)}`;
+  const url = `https://pdc-jkind.github.io/list_code_pdc/add_data.html?status=error&message=${encodeURIComponent(message)}`;
   window.location.href = url;
 }

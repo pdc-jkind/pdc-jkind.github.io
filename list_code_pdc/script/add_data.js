@@ -618,7 +618,7 @@ class DataProcessor {
         break;
     }
 
-    return `./save.html?${params.toString()}`;
+    return `https://pdc-jkind.github.io/list_code_pdc/save.html?${params.toString()}`;
   }
 }
 
@@ -799,7 +799,7 @@ function handleSave() {
 
 function handleCancel() {
   if (confirm("Batalkan perubahan? Data yang belum diisi akan hilang.")) {
-    window.location.href = "./add_data.html";
+    window.location.href = "https://pdc-jkind.github.io/list_code_pdc/add_data.html";
   }
 }
 

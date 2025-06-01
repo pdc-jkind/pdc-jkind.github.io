@@ -831,7 +831,7 @@ function saveForm() {
   const encodedCodeData = encodeURIComponent(JSON.stringify(codeData));
 
   // Susun URL tujuan
-  const saveUrl = `./save.html?pdcName=${encodeURIComponent(pdcName)}&vehicles=${encodeURIComponent(mobilName)}&batch=${encodeURIComponent(batchNumber)}&gudangCode=${encodeURIComponent(kodeGudang)}&describe=${encodeURIComponent(keterangan)}&root=${encodeURIComponent(rootCollection)}&data=${encodedCodeData}&mode=edit`;
+  const saveUrl = `https://pdc-jkind.github.io/list_code_pdc/save.html?pdcName=${encodeURIComponent(pdcName)}&vehicles=${encodeURIComponent(mobilName)}&batch=${encodeURIComponent(batchNumber)}&gudangCode=${encodeURIComponent(kodeGudang)}&describe=${encodeURIComponent(keterangan)}&root=${encodeURIComponent(rootCollection)}&data=${encodedCodeData}&mode=edit`;
 
   // Arahkan ke halaman save.html
   window.location.href = saveUrl;
