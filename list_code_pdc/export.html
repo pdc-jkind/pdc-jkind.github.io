@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Data Code PDC</title>
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./style/main.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand me-5" href="./index.html">
+          <img src="./img/icon.png" alt="Logo" width="55" height="55" />
+        </a>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto custom-nav">
+            <li class="nav-item me-3">
+              <a class="nav-link" href="./index.html"
+                ><i class="bi bi-house-door me-1"></i>Home</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a class="nav-link" href="./add_data.html"
+                ><i class="bi bi-plus-circle me-1"></i>Add data</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a class="nav-link active" href="./export.html"
+                ><i class="bi bi-send-arrow-down me-1"></i>Export</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <div class="container mt-4">
+      <div class="row bg-body-secondary py-2 rounded">
+        <h3 id="page-title" class="text-center text-secondary-emphasis m-0">
+          Piliih Bentuk Export
+        </h3>
+      </div>
+      <div id="detail-content" class="mt-4">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc1">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-warning-emphasis default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-warning-emphasis hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">
+                    Excel Job Costing 1
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc1">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-warning default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-warning hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">
+                    Const JS Job Costing 1
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-success default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-success hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">
+                    Excel Job Costing 2
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-success default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-success hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">
+                    Const JS Job Costing 2
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-info-emphasis default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-info-emphasis hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">Excel DO</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-info-emphasis default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-info-emphasis hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">Const JS DO</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-danger-emphasis default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-danger-emphasis hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">Excel Reject</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-1 hover-card" id="jc2">
+              <div class="card-body text-center">
+                <div
+                  class="d-flex align-items-center justify-content-center gap-3"
+                >
+                  <i
+                    class="bi bi-send-arrow-down-fill fs-1 text-danger-emphasis default-icon"
+                  ></i>
+                  <i
+                    class="bi bi-cloud-arrow-down-fill fs-1 text-danger-emphasis hover-icon d-none"
+                  ></i>
+                  <h5 class="mb-0 text-secondary-emphasis">Const JS Reject</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Input untuk Excel Export -->
+    <div
+      class="modal fade"
+      id="inputModal"
+      tabindex="-1"
+      aria-labelledby="inputModalLabel"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="inputModalLabel">Filter Data Export</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="exportForm">
+              <div class="pdc-form-group border rounded p-3 mb-3">
+                <!-- PDC Selection -->
+                <!-- Form PDC utama -->
+                <div class="mb-3">
+                  <label class="form-label">Nama PDC</label>
+                  <div class="position-relative">
+                    <input
+                      id="pdcInput"
+                      type="text"
+                      class="form-control"
+                      placeholder="Ketik atau pilih nama PDC..."
+                    />
+                    <div
+                      id="pdcSuggestions"
+                      class="suggestion-dropdown d-none"
+                    ></div>
+                  </div>
+                  <div
+                    class="selected-pdc-display mt-2 text-muted small"
+                    style="display: none"
+                  ></div>
+                </div>
+
+                <!-- Form Vehicle utama -->
+                <div class="mb-3">
+                  <label class="form-label">Kendaraan</label>
+                  <div class="position-relative">
+                    <input
+                      id="vehicleInput"
+                      type="text"
+                      class="form-control"
+                      placeholder="Ketik atau pilih nama kendaraan..."
+                    />
+                    <div
+                      id="vehicleSuggestions"
+                      class="suggestion-dropdown d-none"
+                    ></div>
+                  </div>
+                  <div id="vehicleTags" class="mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Container untuk form PDC tambahan -->
+              <div id="pdcFormsContainer"></div>
+
+              <!-- Tombol add (sekarang untuk menambah form PDC) -->
+              <button type="button" id="addVehicleBtn" class="btn btn-primary">
+                Tambah PDC Baru
+              </button>
+
+              <!-- Action Buttons -->
+              <div class="d-flex justify-content-end gap-2">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Batal
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-download me-1"></i>Export
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Loading -->
+    <div
+      class="modal fade"
+      id="loadingModal"
+      tabindex="-1"
+      aria-labelledby="loadingModalLabel"
+      inert
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-5">
+            <div class="align-content-center text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p class="mt-4" id="loadingText">Memproses data...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modals end -->
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="toast align-items-center text-bg-primary border-0 position-fixed bottom-0 end-0 m-3"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      style="display: none; z-index: 1080"
+    >
+      <div class="d-flex">
+        <div class="toast-body" id="toast-message"></div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script type="module" src="./script/export.js"></script>
+  </body>
+</html>
