@@ -3,10 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sementara</title>
+    <title>Checking Authentication</title>
   </head>
   <body>
-    <h1>redirect page</h1>
+    <p>Checking your session...</p>
+
+    <script>
+      // Misalnya userRole disimpan di localStorage atau variabel lain
+      const userRole = localStorage.getItem("userRole");
+      const userSesion = localStorage.getItem("sessionToken"); // Using UID as session token
+      const userEmail = localStorage.getItem("userEmail");
+      const userName = localStorage.getItem("userName");
+      const userPhoto = localStorage.getItem("userPhoto");
+
+      console.log("userRole", userRole);
+      console.log("sessionToken", userSesion); // Using UID as session token
+      console.log("userEmail", userEmail);
+      console.log("userName", userName);
+      console.log("userPhoto", userPhoto); // atau dari session/cookie/dsb
+
+      // Validasi dan redirect
+      if (!userRole) {
+        // Jika userRole tidak ada
+        window.location.href = "/login";
+      } else {
+        const allowedRoles = ["admin", "contributor", "monitor"];
+        if (allowedRoles.includes(userRole)) {
+          // Jika userRole termasuk salah satu yang diizinkan
+          window.location.href = "/dasboard";
+        } else {
+          // Jika userRole tidak diizinkan
+          window.location.href = "/unauthorized";
+        }
+      }
+    </script>
   </body>
-  <script src="main.js"></script>
 </html>

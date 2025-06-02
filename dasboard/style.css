@@ -1,0 +1,312 @@
+/* html,
+body {
+  overscroll-behavior: none;
+} */
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-25px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-8px) rotate(1deg);
+  }
+}
+
+.hover-scale {
+  transition: all 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.sidebar-active {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 3px solid #fff;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+/* skeleton-loading.css - CSS for Dashboard Loading Skeleton */
+
+/* Base skeleton styling */
+.skeleton-item {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Skeleton pulse animation (alternative) */
+.skeleton-pulse {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Skeleton fade out animation */
+.skeleton-fade-out {
+  animation: skeleton-fade-out 0.3s ease-out forwards;
+}
+
+@keyframes skeleton-fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Skeleton variants for different content types */
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5em;
+}
+
+.skeleton-text:last-child {
+  margin-bottom: 0;
+  width: 80%;
+}
+
+.skeleton-avatar {
+  border-radius: 50%;
+}
+
+.skeleton-button {
+  border-radius: 0.375rem;
+  height: 2.5rem;
+}
+
+.skeleton-card {
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Responsive skeleton adjustments */
+@media (max-width: 768px) {
+  .skeleton-item {
+    animation-duration: 1.2s;
+  }
+}
+
+/* Enhanced skeleton with multiple layers */
+.skeleton-layered {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-layered::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Dark mode skeleton (if needed) */
+.dark .skeleton-item {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+/* Skeleton with different speeds */
+.skeleton-slow {
+  animation-duration: 2.5s;
+}
+
+.skeleton-fast {
+  animation-duration: 1s;
+}
+
+/* Chart skeleton specific styling */
+.chart-container.skeleton-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.chart-container.skeleton-item::after {
+  content: "";
+  width: 80%;
+  height: 60%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  position: absolute;
+}
+
+/* Table skeleton enhancements */
+.skeleton-table-header {
+  background: rgba(255, 255, 255, 0.08);
+  height: 1rem;
+  border-radius: 4px;
+}
+
+.skeleton-table-cell {
+  background: rgba(255, 255, 255, 0.06);
+  height: 0.875rem;
+  border-radius: 4px;
+}
+
+/* Staggered animation delays */
+.skeleton-item:nth-child(1) {
+  animation-delay: 0s;
+}
+.skeleton-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.skeleton-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.skeleton-item:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.skeleton-item:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-item,
+  .skeleton-pulse,
+  .skeleton-layered::before {
+    animation: none;
+  }
+
+  .skeleton-item {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* Loading indicator overlay (optional) */
+.skeleton-overlay {
+  position: relative;
+}
+
+.skeleton-overlay::after {
+  content: "Memuat data...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}

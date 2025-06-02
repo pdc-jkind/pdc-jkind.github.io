@@ -1,0 +1,208 @@
+/* Custom CSS Styles for Unauthorized Page */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-25px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-8px) rotate(1deg);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+.hover-scale {
+  transition: all 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3),
+    0 2px 4px -1px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4),
+    0 4px 6px -2px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3),
+    0 2px 4px -1px rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4),
+    0 4px 6px -2px rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.back-btn {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Shake animation for denied access */
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Glow effect for important elements */
+.glow-red {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .floating-animation {
+    animation-duration: 8s;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(8px);
+  }
+
+  .pulse-animation {
+    animation-duration: 3s;
+  }
+}
+
+/* Loading animation for buttons */
+.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Notification styles */
+.notification-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.notification-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notification-info {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+/* Warning box enhancements */
+.warning-box {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Button hover glow effects */
+.contact-btn:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6),
+    0 10px 15px -3px rgba(59, 130, 246, 0.4);
+}
+
+.whatsapp-btn:hover {
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6),
+    0 10px 15px -3px rgba(16, 185, 129, 0.4);
+}
