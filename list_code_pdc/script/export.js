@@ -704,11 +704,28 @@ class JobCostingCardHandler {
       tsContent += `    warehouseCode: "${pdcData.warehouseCode}",\n`;
 
       pdcData.vehicles.forEach(vehicle => {
-        tsContent += `    "${vehicle.name}": {\n`;
-        tsContent += `      describe: "${vehicle.describe}",\n`;
-        tsContent += `      code: \n`;
-        tsContent += `      ${vehicle.code || 'default'},\n`;
-        tsContent += `      \n    },\n`;
+        let codeObj = {};
+
+        // Coba parse jika vehicle.code berupa string
+        if (typeof vehicle.code === "string") {
+          try {
+            codeObj = JSON.parse(vehicle.code);
+          } catch (e) {
+            console.warn(`Gagal parse code untuk ${vehicle.name}`, e);
+          }
+        } else if (typeof vehicle.code === "object" && vehicle.code !== null) {
+          codeObj = vehicle.code;
+        }
+
+        const [client, code] = Object.entries(codeObj)[0] || ["UNKNOWN", "default"];
+
+        console.log(`DEBUG -> vehicle.name: ${vehicle.name}, client: ${client}, code: ${code}`);
+
+        tsContent += `  "${vehicle.name}": {\n`;
+        tsContent += `    describe: "${vehicle.describe}",\n`;
+        tsContent += `    code: "${code}",\n`;
+        tsContent += `    client: "${client}"\n`;
+        tsContent += `  },\n`;
       });
 
       tsContent += `  },\n`;
