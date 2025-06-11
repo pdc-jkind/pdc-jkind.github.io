@@ -648,7 +648,7 @@ class JobCostingCardHandler {
   }
 
   generateJC1TS(parsedData) {
-    let tsContent = 'export const productbatchNumbersJC1 = {\n';
+    let tsContent = 'export const productCodesJC1 = {\n';
     const pdcGroups = this.groupParsedDataByPDC(parsedData);
 
     Object.entries(pdcGroups).forEach(([pdcName, pdcData]) => {
@@ -668,7 +668,7 @@ class JobCostingCardHandler {
   }
 
   generateJC2TS(parsedData) {
-    let tsContent = 'export const productbatchNumbersJC2 = {\n';
+    let tsContent = 'export const productCodesJC2 = {\n';
     const pdcGroups = this.groupParsedDataByPDC(parsedData);
 
     Object.entries(pdcGroups).forEach(([pdcName, pdcData]) => {
