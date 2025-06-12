@@ -4,29 +4,120 @@ import { parseJobCosting1, parseJobCosting2 } from "../helpers/jobCostingParser.
 let allData = {};
 let selectedPDC = "";
 let selectedBrand = "";
-let currentJobCosting = "Job Costing 1"; // Default value
-let currentJobCostingCode = "JC1";
+
+// Enhanced storage system with fallback
+class JobCostingStorage {
+  constructor() {
+    // Fallback untuk environment yang tidak mendukung localStorage
+    this.inMemoryStorage = {};
+    this.isLocalStorageAvailable = this.checkLocalStorageAvailability();
+  }
+
+  checkLocalStorageAvailability() {
+    try {
+      const test = '__localStorage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      console.log('localStorage tidak tersedia, menggunakan in-memory storage');
+      return false;
+    }
+  }
+
+  setItem(key, value) {
+    const stringValue = JSON.stringify(value);
+    if (this.isLocalStorageAvailable) {
+      try {
+        localStorage.setItem(key, stringValue);
+      } catch (e) {
+        console.warn('Gagal menyimpan ke localStorage, menggunakan in-memory storage');
+        this.inMemoryStorage[key] = stringValue;
+      }
+    } else {
+      this.inMemoryStorage[key] = stringValue;
+    }
+  }
+
+  getItem(key) {
+    let value = null;
+    if (this.isLocalStorageAvailable) {
+      try {
+        value = localStorage.getItem(key);
+      } catch (e) {
+        console.warn('Gagal membaca dari localStorage, menggunakan in-memory storage');
+        value = this.inMemoryStorage[key] || null;
+      }
+    } else {
+      value = this.inMemoryStorage[key] || null;
+    }
+
+    if (value) {
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        return value;
+      }
+    }
+    return null;
+  }
+
+  removeItem(key) {
+    if (this.isLocalStorageAvailable) {
+      try {
+        localStorage.removeItem(key);
+      } catch (e) {
+        delete this.inMemoryStorage[key];
+      }
+    } else {
+      delete this.inMemoryStorage[key];
+    }
+  }
+}
+
+// Initialize storage
+const storage = new JobCostingStorage();
+
+// Default configuration dengan fallback dari storage
+const getInitialJobCosting = () => {
+  const saved = storage.getItem('selectedJobCosting');
+  if (saved && saved.text && saved.code) {
+    return saved;
+  }
+  return {
+    text: "Job Costing 1",
+    code: "JC1"
+  };
+};
+
+const initialJobCosting = getInitialJobCosting();
+let currentJobCosting = initialJobCosting.text;
+let currentJobCostingCode = initialJobCosting.code;
 
 const loadingIndicator = document.getElementById("loadingIndicator");
 
-// Fungsi untuk menangani klik pada dropdown item
+// Enhanced dropdown setup dengan storage
 function setupJobCostingDropdown() {
   const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
+  const dropdownButton = document.querySelector('.dropdown-toggle');
+
+  // Set initial button text dari storage atau default
+  if (dropdownButton) {
+    dropdownButton.textContent = currentJobCosting;
+  }
 
   dropdownItems.forEach(item => {
     item.addEventListener('click', function (event) {
       event.preventDefault();
 
-      // Ambil teks dari item dropdown yang diklik
       const jobCostingText = this.textContent.trim();
 
-      // Update teks pada tombol dropdown
-      const dropdownButton = document.querySelector('.dropdown-toggle');
+      // Update button text
       if (dropdownButton) {
         dropdownButton.textContent = jobCostingText;
       }
 
-      // Tentukan kode berdasarkan teks
+      // Determine code
       let jobCostingCode = "";
       if (jobCostingText === "Job Costing 1") {
         jobCostingCode = "JC1";
@@ -36,111 +127,107 @@ function setupJobCostingDropdown() {
         jobCostingCode = "DO";
       }
 
-      // Update nilai global
+      // Update global values
       currentJobCosting = jobCostingText;
       currentJobCostingCode = jobCostingCode;
 
+      // Save to storage
+      storage.setItem('selectedJobCosting', {
+        text: jobCostingText,
+        code: jobCostingCode,
+        timestamp: Date.now()
+      });
+
+      // Load new data
       loadAndRenderCards();
     });
   });
 }
+
+// Enhanced data caching system
+class DataCache {
+  constructor() {
+    this.cache = {};
+    this.maxAge = 5 * 60 * 1000; // Cache selama 5 menit
+  }
+
+  set(key, data) {
+    this.cache[key] = {
+      data: data,
+      timestamp: Date.now()
+    };
+  }
+
+  get(key) {
+    const cached = this.cache[key];
+    if (!cached) return null;
+
+    // Check if cache is still valid
+    if (Date.now() - cached.timestamp > this.maxAge) {
+      delete this.cache[key];
+      return null;
+    }
+
+    return cached.data;
+  }
+
+  clear() {
+    this.cache = {};
+  }
+
+  remove(key) {
+    delete this.cache[key];
+  }
+}
+
+const dataCache = new DataCache();
 
 async function loadAndRenderCards() {
   try {
     const container = document.getElementById("cardContainer");
     container.innerHTML = "";
 
+    // Show loading
     loadingIndicator.style.display = "block";
 
+    // Reset states
     allData = {};
     selectedPDC = "";
     selectedBrand = "";
     document.getElementById("searchPDC").value = "";
     document.getElementById("searchBrand").value = "";
 
-    // Gunakan loadJobCostingData (sudah otomatis parsing dari helper)
-    const parsedData = await loadJobCostingData(currentJobCosting, currentJobCostingCode);
+    // Try to get data from cache first
+    const cacheKey = `${currentJobCosting}_${currentJobCostingCode}`;
+    let parsedData = dataCache.get(cacheKey);
+
+    if (!parsedData) {
+      console.log(`Loading fresh data for ${currentJobCosting}...`);
+      parsedData = await loadJobCostingData(currentJobCosting, currentJobCostingCode);
+
+      // Cache the data
+      dataCache.set(cacheKey, parsedData);
+    } else {
+      console.log(`Using cached data for ${currentJobCosting}`);
+    }
 
     loadingIndicator.style.display = "none";
     allData = {};
 
-    // Ekstrak data dengan mengenali struktur nested array
-    if (Array.isArray(parsedData)) {
-      // Iterasi melalui array utama
-      parsedData.forEach((group, groupIndex) => {
-        // Periksa apakah group adalah array
-        if (Array.isArray(group)) {
-          // Iterasi melalui setiap item dalam group
-          group.forEach((item, itemIndex) => {
-            // Jika item memiliki id, gunakan sebagai kunci
-            if (item && item.id) {
-              const id = item.id;
-              const batchNumber = item.batchNumber || "unknown";
-
-              // Jika lokasi belum ada di allData, tambahkan
-              if (!allData[id]) {
-                allData[id] = {
-                  batchNumber: batchNumber
-                };
-              }
-
-              // Jika item memiliki mobil (array mobil), tambahkan setiap mobil sebagai model
-              if (item.mobil && Array.isArray(item.mobil)) {
-                item.mobil.forEach(mobilName => {
-                  // Tambahkan mobil sebagai model dengan properti dasar
-                  allData[id][mobilName] = {
-                    code: item.code || [],
-                    describe: item.describe || [],
-                    warehouseCode: item.warehouseCode || []
-                  };
-                });
-              }
-            }
-          });
-        } else if (typeof group === 'object' && group !== null) {
-          // Jika group adalah objek dengan properti numerik (seperti yang terlihat di log)
-          const numericKeys = Object.keys(group).filter(k => !isNaN(parseInt(k)));
-          numericKeys.forEach(key => {
-            const item = group[key];
-            if (item && item.id) {
-              const id = item.id;
-              const batchNumber = item.batchNumber || "unknown";
-
-              if (!allData[id]) {
-                allData[id] = {
-                  batchNumber: batchNumber
-                };
-              }
-
-              if (item.mobil && Array.isArray(item.mobil)) {
-                item.mobil.forEach(mobilName => {
-                  allData[id][mobilName] = {
-                    code: item.code || [],
-                    describe: item.describe || [],
-                    warehouseCode: item.warehouseCode || []
-                  };
-                });
-              }
-            }
-          });
-        }
-      });
-    }
+    // Process the data (same logic as before)
+    processJobCostingData(parsedData);
 
     const pdcSet = new Set(Object.keys(allData));
 
-    // Inisialisasi dropdown PDC
+    // Setup PDC search
     setupSearch("searchPDC", "dropdownPDC", [...pdcSet], (value) => {
       selectedPDC = value;
-      selectedBrand = ""; // reset brand saat PDC berubah
+      selectedBrand = "";
       document.getElementById("searchBrand").value = "";
 
       const lokasiData = allData[selectedPDC] || {};
-
-      // Kita perlu mengambil brand/mobil dari data yang sudah diolah
       const brandSet = new Set();
 
-      // Filter properti yang bukan metadata
       Object.keys(lokasiData)
         .filter(key => key !== "batchNumber")
         .forEach(key => brandSet.add(key));
@@ -157,34 +244,85 @@ async function loadAndRenderCards() {
 
     toggleInput("searchBrand", false);
     renderFilteredCards();
+
   } catch (error) {
     console.error("Gagal memuat data dari Firestore:", error);
     loadingIndicator.style.display = "none";
   }
 }
 
-// Updated loadJobCostingData function to handle DO
+// Separate function to process data for better organization
+function processJobCostingData(parsedData) {
+  if (Array.isArray(parsedData)) {
+    parsedData.forEach((group, groupIndex) => {
+      if (Array.isArray(group)) {
+        group.forEach((item, itemIndex) => {
+          processDataItem(item);
+        });
+      } else if (typeof group === 'object' && group !== null) {
+        const numericKeys = Object.keys(group).filter(k => !isNaN(parseInt(k)));
+        numericKeys.forEach(key => {
+          processDataItem(group[key]);
+        });
+      }
+    });
+  }
+}
+
+function processDataItem(item) {
+  if (item && item.id) {
+    const id = item.id;
+    const batchNumber = item.batchNumber || "unknown";
+
+    if (!allData[id]) {
+      allData[id] = {
+        batchNumber: batchNumber
+      };
+    }
+
+    if (item.mobil && Array.isArray(item.mobil)) {
+      item.mobil.forEach(mobilName => {
+        allData[id][mobilName] = {
+          code: item.code || [],
+          describe: item.describe || [],
+          warehouseCode: item.warehouseCode || []
+        };
+      });
+    }
+  }
+}
+
+// Updated loadJobCostingData function dengan error handling yang lebih baik
 const loadJobCostingData = async (collectionName, structureType) => {
   try {
     const rawData = await getAllJobCostingData(collectionName);
 
+    if (!rawData || rawData.length === 0) {
+      console.warn(`No data found for collection: ${collectionName}`);
+      return [];
+    }
+
     const parsedData = rawData.map(doc => {
-      if (structureType === "JC1") {
-        return parseJobCosting1(doc);
-      } else if (structureType === "JC2") {
-        return parseJobCosting2(doc);
-      } else if (structureType === "DO") {
-        // For DO, use the same parsing as Job Costing 1 since the structure is similar
-        return parseJobCosting1(doc);
-      } else {
-        return doc; // fallback
+      try {
+        if (structureType === "JC1") {
+          return parseJobCosting1(doc);
+        } else if (structureType === "JC2") {
+          return parseJobCosting2(doc);
+        } else if (structureType === "DO") {
+          return parseJobCosting1(doc); // Use JC1 parser for DO
+        } else {
+          return doc; // fallback
+        }
+      } catch (parseError) {
+        console.error(`Error parsing document:`, parseError);
+        return null;
       }
-    });
+    }).filter(item => item !== null); // Remove failed parses
 
     return parsedData;
   } catch (error) {
     console.error("Failed to load and parse job costing data:", error);
-    return [];
+    throw error; // Re-throw to be handled by caller
   }
 };
 
@@ -248,7 +386,6 @@ function renderFilteredCards() {
     }
   }
 
-  // Tampilkan pesan jika tidak ada kartu yang dirender
   if (cardCount === 0) {
     const noDataMsg = document.createElement("div");
     noDataMsg.className = "col-12 text-center py-4";
@@ -269,7 +406,7 @@ function setupSearch(inputId, dropdownId, dataList, onSelect) {
 
     if (!query) {
       dropdown.classList.remove("show");
-      if (onSelect) onSelect(""); // kosongkan filter saat input kosong
+      if (onSelect) onSelect("");
       return;
     }
 
@@ -330,9 +467,18 @@ function setupSearch(inputId, dropdownId, dataList, onSelect) {
   }
 }
 
+// Utility function untuk clear cache jika diperlukan
+function clearDataCache() {
+  dataCache.clear();
+  storage.removeItem('selectedJobCosting');
+  console.log('Cache cleared');
+}
+
+// Export function untuk debugging
+window.clearJobCostingCache = clearDataCache;
+
 document.addEventListener("DOMContentLoaded", function () {
   setupJobCostingDropdown();
-
   loadAndRenderCards();
 });
 
