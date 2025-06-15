@@ -241,8 +241,7 @@ class FormRenderer {
               <label for="descriptionInput${index}" class="form-label">
                 <strong>Deskripsi Product:</strong>
               </label>
-              <input type="text" class="form-control description-input" id="descriptionInput${index}" 
-                     placeholder="Masukkan deskripsi produk..." />
+              <input type="text" class="form-control description-input" id="descriptionInput${index}" placeholder="Masukkan deskripsi produk..." autocomplete="off"/>
             </div>
           </div>
         </div>
@@ -252,8 +251,7 @@ class FormRenderer {
               <label for="productCodeInput${index}" class="form-label">
                 <strong>Kode Produk:</strong>
               </label>
-              <input type="text" class="form-control code-input" id="productCodeInput${index}" 
-                     placeholder="Masukkan kode produk..." />
+              <input type="text" class="form-control code-input" id="productCodeInput${index}" placeholder="Masukkan kode produk..." autocomplete="off"/>
             </div>
           </div>
         </div>
@@ -291,8 +289,7 @@ class FormRenderer {
               <label for="clientInput" class="form-label">
                 <strong>Client:</strong>
               </label>
-              <input type="text" class="form-control" id="clientInput" 
-                     placeholder="Masukkan client..." disabled/>
+              <input type="text" class="form-control" id="clientInput" placeholder="Masukkan client..." disabled/>
             </div>
           </div>
           <div class="col-md-6 col-11">
@@ -300,8 +297,7 @@ class FormRenderer {
               <label for="doCodeInput" class="form-label">
                 <strong>Kode Produk:</strong>
               </label>
-              <input type="text" class="form-control" id="doCodeInput" 
-                     placeholder="Masukkan kode produk..." />
+              <input type="text" class="form-control" id="doCodeInput" placeholder="Masukkan kode produk..." autocomplete="off"/>
             </div>
           </div>
         </div>
@@ -315,7 +311,7 @@ class FormRenderer {
         <span class="input-group-text drag-handle" style="cursor: grab;">
           <i class="bi bi-grip-horizontal"></i>
         </span>
-        <input class="form-control code-edit" placeholder="Kode produk..." />
+        <input class="form-control code-edit" placeholder="Kode produk..." autocomplete="off"/>
         <button class="btn btn-outline-danger btn-sm remove-code-btn" type="button" 
                 title="Hapus kode" onclick="removeCode(this)">
           <i class="bi bi-x"></i>

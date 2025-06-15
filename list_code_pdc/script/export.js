@@ -28,9 +28,13 @@ class JobCostingCardHandler {
 
   init() {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.setupEventListeners());
+      document.addEventListener('DOMContentLoaded', () => {
+        this.setupEventListeners();
+        this.setupKeyboardShortcuts();
+      });
     } else {
       this.setupEventListeners();
+      this.setupKeyboardShortcuts();
     }
   }
 
@@ -159,6 +163,7 @@ class JobCostingCardHandler {
 
   setupVehicleTagInput(input, dropdown, vehicles, tagsContainer) {
     const selectedVehicles = new Set();
+    let selectedIndex = -1;
 
     const handleInput = (e) => {
       const query = e.target.value.toLowerCase();
@@ -178,10 +183,45 @@ class JobCostingCardHandler {
         dropdown.classList.add('d-none');
       });
 
+      selectedIndex = -1;
       dropdown.classList.toggle('d-none', filteredOptions.length === 0);
     };
 
+    const handleKeydown = (e) => {
+      const visibleItems = dropdown.querySelectorAll('.suggestion-item:not(.text-muted)');
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, visibleItems.length - 1);
+          updateSelection(visibleItems);
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          updateSelection(visibleItems);
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && visibleItems[selectedIndex]) {
+            visibleItems[selectedIndex].click();
+          }
+          break;
+        case 'Escape':
+          dropdown.classList.add('d-none');
+          selectedIndex = -1;
+          break;
+      }
+    };
+
+    const updateSelection = (items) => {
+      items.forEach((item, index) => {
+        item.classList.toggle('selected', index === selectedIndex);
+      });
+    };
+
     input.addEventListener('input', handleInput);
+    input.addEventListener('keydown', handleKeydown);
     this.setupClickOutside(input, dropdown);
   }
 
@@ -207,6 +247,8 @@ class JobCostingCardHandler {
   }
 
   setupAutocomplete(input, dropdown, options, onSelect = null) {
+    let selectedIndex = -1;
+
     const handleInput = (e) => {
       const query = e.target.value.toLowerCase();
       if (query.length === 0) {
@@ -226,11 +268,45 @@ class JobCostingCardHandler {
         this.displaySelectedPDC(input, selectedOption);
         if (onSelect) onSelect(selectedOption);
       });
-
+      selectedIndex = -1;
       dropdown.classList.remove('d-none');
     };
 
+    const handleKeydown = (e) => {
+      const visibleItems = dropdown.querySelectorAll('.suggestion-item:not(.text-muted)');
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, visibleItems.length - 1);
+          updateSelection(visibleItems);
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          updateSelection(visibleItems);
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && visibleItems[selectedIndex]) {
+            visibleItems[selectedIndex].click();
+          }
+          break;
+        case 'Escape':
+          dropdown.classList.add('d-none');
+          selectedIndex = -1;
+          break;
+      }
+    };
+
+    const updateSelection = (items) => {
+      items.forEach((item, index) => {
+        item.classList.toggle('selected', index === selectedIndex);
+      });
+    };
+
     input.addEventListener('input', handleInput);
+    input.addEventListener('keydown', handleKeydown);
     this.setupClickOutside(input, dropdown);
   }
 
@@ -905,6 +981,34 @@ class JobCostingCardHandler {
   handleError(error) {
     console.error('Job Costing Handler Error:', error);
     this.closeModal(this.loadingModalId);
+  }
+
+  setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      // Pastikan modal sedang terbuka
+      const inputModal = document.getElementById('inputModal');
+      if (!inputModal || !inputModal.classList.contains('show')) {
+        return;
+      }
+
+      // Ctrl + "+" untuk Add Vehicle
+      if (e.ctrlKey && (e.key === '+' || e.key === '=')) {
+        e.preventDefault();
+        const addVehicleBtn = document.getElementById('addVehicleBtn');
+        if (addVehicleBtn) {
+          addVehicleBtn.click();
+        }
+      }
+
+      // Ctrl + S untuk Export
+      if (e.ctrlKey && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        const exportBtn = document.querySelector('button[type="submit"]');
+        if (exportBtn) {
+          exportBtn.click();
+        }
+      }
+    });
   }
 }
 

@@ -269,6 +269,19 @@
   color: #6c757d;
 }
 
+.suggestion-item.selected {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.suggestion-item {
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.suggestion-item:hover {
+  background-color: #f8f9fa;
+}
 @keyframes subtlePulse {
   0%,
   100% {

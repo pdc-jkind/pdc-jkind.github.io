@@ -178,13 +178,13 @@ function generateEditModeHtml(currentDetail) {
         <!-- Keterangan -->
         <div class="mb-3">
           <label for="keteranganInput" class="form-label"><strong>Keterangan:</strong></label>
-          <input class="form-control" id="keteranganInput" value="${currentDetail.describe}" placeholder="Masukkan keterangan...">
+          <input class="form-control" id="keteranganInput" value="${currentDetail.describe}" placeholder="Masukkan keterangan..." autocomplete="off">
         </div>
         
         <!-- Keterangan -->
         <div class="mb-3">
           <label for="kodeGudangInput" class="form-label"><strong>Kode Gudang:</strong></label>
-          <input class="form-control" id="kodeGudangInput" value="${currentDetail.warehouseCode}" placeholder="Masukkan keterangan...">
+          <input class="form-control" id="kodeGudangInput" value="${currentDetail.warehouseCode}" placeholder="Masukkan keterangan..." autocomplete="off">
         </div>
 
         <!-- Job Costing Type Dropdown -->
@@ -200,7 +200,7 @@ function generateEditModeHtml(currentDetail) {
         <!-- Batch Number -->
         <div class="mb-3">
           <label for="batchInput" class="form-label"><strong>Batch Number:</strong></label>
-          <input type="text" class="form-control" id="batchInput" value="${currentDetail.batch}" placeholder="Masukkan batch number...">
+          <input type="text" class="form-control" id="batchInput" value="${currentDetail.batch}" placeholder="Masukkan batch number..." autocomplete="off">
         </div>
         
         <!-- Dynamic Content based on Job Costing Type -->
@@ -314,11 +314,7 @@ function populateCodeData(currentDetail) {
                   <strong>Deskripsi Product:</strong>
                 </label>
                 <input
-                  type="text"
-                  class="form-control description-input"
-                  id="descriptionInput${idx}"
-                  value="${key}"
-                  placeholder="Masukkan deskripsi produk..."
+                  type="text" class="form-control description-input" id="descriptionInput${idx}" value="${key}" placeholder="Masukkan deskripsi produk..." autocomplete="off"
                 />
               </div>
             </div>
@@ -330,11 +326,7 @@ function populateCodeData(currentDetail) {
                   <strong>Kode Produk:</strong>
                 </label>
                 <input
-                  type="text"
-                  class="form-control code-input"
-                  id="productCodeInput${idx}"
-                  value="${value}"
-                  placeholder="Masukkan kode produk..."
+                  type="text" class="form-control code-input" id="productCodeInput${idx}" value="${value}" placeholder="Masukkan kode produk..." autocomplete="off"
                 />
               </div>
             </div>
@@ -449,11 +441,7 @@ function populateCodeData(currentDetail) {
                   <strong>Kode Produk:</strong>
                 </label>
                 <input
-                  type="text"
-                  class="form-control code-input"
-                  id="doCodeInput${idx}"
-                  value="${value}"
-                  placeholder="Masukkan kode produk..."
+                  type="text" class="form-control code-input" id="doCodeInput${idx}" value="${value}" placeholder="Masukkan kode produk..." autocomplete="off"
                 />
               </div>
             </div>
@@ -541,7 +529,7 @@ function populateCodeData(currentDetail) {
           <span class="input-group-text drag-handle" style="cursor: grab;">
             <i class="bi bi-grip-horizontal"></i>
           </span>
-          <input class="form-control code-edit" rows="1" value="${value}"></input>
+          <input class="form-control code-edit" rows="1" value="${value}" autocomplete="off"></input>
           <button class="btn btn-outline-danger btn-sm remove-code-btn" type="button" title="Hapus kode" onclick="removeCode(this)">
             <i class="bi bi-x"></i>
           </button>
@@ -591,10 +579,7 @@ function addEmptyProductPair(container) {
             <strong>Deskripsi Product:</strong>
           </label>
           <input
-            type="text"
-            class="form-control description-input"
-            id="descriptionInput1"
-            placeholder="Masukkan deskripsi produk..."
+            type="text" class="form-control description-input" id="descriptionInput1" placeholder="Masukkan deskripsi produk..." autocomplete="off"
           />
         </div>
       </div>
@@ -605,11 +590,7 @@ function addEmptyProductPair(container) {
           <label for="productCodeInput1" class="form-label">
             <strong>Kode Produk:</strong>
           </label>
-          <input
-            type="text"
-            class="form-control code-input"
-            id="productCodeInput1"
-            placeholder="Masukkan kode produk..."
+          <input type="text" class="form-control code-input" id="productCodeInput1" placeholder="Masukkan kode produk..." autocomplete="off"
           />
         </div>
       </div>
@@ -636,7 +617,7 @@ function addEmptyCodeEdits(container) {
       <span class="input-group-text drag-handle" style="cursor: grab;">
         <i class="bi bi-grip-horizontal"></i>
       </span>
-      <input type="text" class="form-control code-edit" placeholder="Kode produk..."/>
+      <input type="text" class="form-control code-edit" placeholder="Kode produk..." autocomplete="off"/>
       <button class="btn btn-outline-danger btn-sm remove-code-btn" type="button" title="Hapus kode" onclick="removeCode(this)">
         <i class="bi bi-x"></i>
       </button>
@@ -707,11 +688,7 @@ function addNewProductPair() {
           <label for="descriptionInput${newIdx}" class="form-label">
             <strong>Deskripsi Product:</strong>
           </label>
-          <input
-            type="text"
-            class="form-control description-input"
-            id="descriptionInput${newIdx}"
-            placeholder="Masukkan deskripsi produk..."
+          <input type="text" class="form-control description-input" id="descriptionInput${newIdx}" placeholder="Masukkan deskripsi produk..." autocomplete="off"
           />
         </div>
       </div>
@@ -722,11 +699,7 @@ function addNewProductPair() {
           <label for="productCodeInput${newIdx}" class="form-label">
             <strong>Kode Produk:</strong>
           </label>
-          <input
-            type="text"
-            class="form-control code-input"
-            id="productCodeInput${newIdx}"
-            placeholder="Masukkan kode produk..."
+          <input type="text" class="form-control code-input" id="productCodeInput${newIdx}" placeholder="Masukkan kode produk..." autocomplete="off"
           />
         </div>
       </div>
