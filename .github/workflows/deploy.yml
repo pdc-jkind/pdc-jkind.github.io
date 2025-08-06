@@ -1,0 +1,72 @@
+name: Deploy Vite Ultimate (Source → Main)
+
+on:
+  push:
+    branches:
+      - source # hanya berjalan jika ada push ke branch source
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout branch source
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js dengan cache npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # 3. Cache hasil build dist untuk mempercepat build ulang
+      - name: Cache Vite Dist
+        uses: actions/cache@v4
+        id: vite-dist-cache
+        with:
+          path: dist
+          key: vite-dist-${{ github.sha }}
+          restore-keys: |
+            vite-dist-
+
+      # 4. Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # 5. Build hanya jika cache dist tidak ditemukan
+      - name: Build Project
+        if: steps.vite-dist-cache.outputs.cache-hit != 'true'
+        run: npm run build
+
+      # 6. Tambahkan 404.html sebagai fallback untuk SPA
+      - name: Add SPA Fallback
+        run: cp dist/index.html dist/404.html
+
+      # 7. Kompresi hasil build (gzip & brotli)
+      - name: Compress Assets (gzip & brotli)
+        run: |
+          find dist -type f -name '*.js' -o -name '*.css' -o -name '*.html' | while read file; do
+            gzip -9 -k "$file"
+            brotli -f -q 11 "$file"
+          done
+
+      # 8. Upload artifact dist (opsional, untuk debugging jika deploy gagal)
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vite-dist
+          path: dist
+
+      # 9. Deploy ke branch main
+      - name: Deploy to GitHub Pages (main)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: main
+          force_orphan: true
