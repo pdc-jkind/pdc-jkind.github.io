@@ -7,6 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/list_code_pdc/" element={<Landing />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

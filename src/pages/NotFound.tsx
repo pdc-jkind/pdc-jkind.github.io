@@ -13,7 +13,7 @@ const NotFound: React.FC = () => {
   const [glitchEffect, setGlitchEffect] = useState(false)
 
   const newDomain = 'https://code-list-pdc.web.app'
-  const developerName = 'PDC Developer Team'
+  const developerName = 'Ryan Dev'
 
   useEffect(() => {
     setIsVisible(true)
@@ -43,17 +43,17 @@ const NotFound: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-4000"></div>
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div className="absolute top-3/4 right-1/4 w-48 h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-4000"></div>
       </div>
 
       {/* Floating Error Symbols */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={i}
-            className="absolute text-red-500 opacity-20 font-bold text-2xl animate-float"
+            className="absolute text-red-500 opacity-20 font-bold text-lg animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -67,22 +67,22 @@ const NotFound: React.FC = () => {
       </div>
 
       <div
-        className={`relative z-10 flex items-center justify-center min-h-screen p-4 transition-all duration-1000 ${
+        className={`relative z-10 flex items-center justify-center min-h-screen p-3 transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Error Icon with Animation */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-6 flex justify-center">
             <div className="relative">
               <div
-                className={`w-24 h-24 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-200 ${
+                className={`w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center shadow-xl transition-all duration-200 ${
                   glitchEffect ? 'animate-bounce scale-110' : ''
                 }`}
               >
-                <AlertTriangle className="w-12 h-12 text-white animate-pulse" />
+                <AlertTriangle className="w-10 h-10 text-white animate-pulse" />
               </div>
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-ping">
+              <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center animate-ping">
                 <span className="text-xs font-bold text-yellow-900">!</span>
               </div>
             </div>
@@ -90,7 +90,7 @@ const NotFound: React.FC = () => {
 
           {/* 404 Title with Glitch Effect */}
           <h1
-            className={`text-6xl md:text-8xl font-bold text-white mb-4 transition-all duration-200 ${
+            className={`text-5xl md:text-6xl font-bold text-white mb-3 transition-all duration-200 ${
               glitchEffect ? 'text-red-500 scale-105' : ''
             }`}
           >
@@ -100,67 +100,67 @@ const NotFound: React.FC = () => {
           </h1>
 
           {/* Error Message */}
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">
+          <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">
             Oops! Page Not Found
           </h2>
 
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-300 mb-6 max-w-xl mx-auto leading-relaxed">
             The page you're looking for doesn't exist here anymore. We've
             recently moved to a new domain!
           </p>
 
           {/* Migration Info Card */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <Search className="w-8 h-8 text-gray-400" />
-              <h3 className="text-xl font-semibold text-white">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20 shadow-xl">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Search className="w-6 h-6 text-gray-400" />
+              <h3 className="text-lg font-semibold text-white">
                 Looking for our content?
               </h3>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl p-6 border border-blue-500/30">
-              <p className="text-white text-lg mb-4">
+            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 border border-blue-500/30">
+              <p className="text-white text-base mb-3">
                 We've moved everything to our new domain:
               </p>
-              <div className="flex items-center justify-center gap-3 bg-black/20 rounded-xl p-4">
-                <code className="text-green-400 text-lg font-mono break-all">
+              <div className="flex items-center justify-center gap-2 bg-black/20 rounded-lg p-3">
+                <code className="text-green-400 text-base font-mono break-all">
                   {newDomain}
                 </code>
-                <ArrowRight className="w-5 h-5 text-blue-400 animate-pulse" />
+                <ArrowRight className="w-4 h-4 text-blue-400 animate-pulse" />
               </div>
             </div>
           </div>
 
           {/* Quick Actions */}
-          <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          <div className="grid sm:grid-cols-3 gap-3 mb-6">
             <button
               onClick={handleGoHome}
-              className="group bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              className="group bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-4 rounded-xl shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <Home className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-              Go Home
+              <Home className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="text-sm">Go Home</span>
             </button>
 
             <button
               onClick={handleVisitNewSite}
-              className="group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              className="group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium py-3 px-4 rounded-xl shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-              Visit New Site
+              <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="text-sm">Visit New Site</span>
             </button>
 
             <button
               onClick={handleRefresh}
-              className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 px-4 rounded-xl shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <RefreshCw className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" />
-              Refresh
+              <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
+              <span className="text-sm">Refresh</span>
             </button>
           </div>
 
           {/* Developer Info */}
-          <div className="bg-gradient-to-r from-gray-800/50 to-gray-700/50 backdrop-blur-lg rounded-2xl p-6 border border-gray-600/30">
-            <p className="text-gray-300">
+          <div className="bg-gradient-to-r from-gray-800/50 to-gray-700/50 backdrop-blur-lg rounded-xl p-4 border border-gray-600/30">
+            <p className="text-gray-300 text-sm">
               Need help? Contact{' '}
               <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 {developerName}
@@ -169,8 +169,8 @@ const NotFound: React.FC = () => {
           </div>
 
           {/* Fun Fact */}
-          <div className="mt-8 text-gray-400 text-sm">
-            <p className="mb-2">
+          <div className="mt-3 mb-5 text-gray-400 text-xs">
+            <p className="mb-1">
               💡 Fun fact: HTTP 404 errors were named after room 404 at CERN
             </p>
             <p>where the World Wide Web was born!</p>
@@ -179,7 +179,7 @@ const NotFound: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-500 text-sm">
+      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-gray-500 text-xs">
         <p>
           © 2025 {developerName}. This old domain is still maintained for
           compatibility.
